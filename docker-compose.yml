@@ -1,0 +1,34 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:15
+    container_name: schedsync-postgres
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "${DB_PORT}:5432"
+    env_file:
+      - .env.docker
+  schedsync:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    env_file:
+      - .env.docker
+    ports:
+      - "${DOCKER_PORT}:8080"
+    networks:
+      - my-network
+    stdin_open: true
+    tty: true
+networks:
+  my-network:
+    driver: bridge
+volumes:
+  pgdata:

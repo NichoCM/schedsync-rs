@@ -1,0 +1,30 @@
+[package]
+name = "schedsync-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.86"
+tokio = { version = "1.38.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+quick-xml = { version = "0.37.0", features = ["serialize", "serde"]}
+regex = "1.5"
+dotenv = "0.15.0"
+axum = "0.7.5"
+reqwest = { version = "0.12", features = ["json"] }
+serde_urlencoded = "0.7.1"
+diesel = { version = "2.2.0", features = ["chrono", "r2d2", "postgres", "sqlite"] }
+chrono = "0.4.38"
+uuid = { version = "1.8.0", features = ["v4"] }
+http-body-util = "0.1.2"
+base64 = "0.22.1"
+ical = "0.11.0"
+
+[dev-dependencies]
+tower = { version = "0.4", features = ["util"] }
+
+[features]
+mysql = ["diesel/mysql"]
+sqlite = ["diesel/sqlite"]
+postgres = ["diesel/postgres"]

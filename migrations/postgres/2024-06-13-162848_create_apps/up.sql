@@ -1,0 +1,6 @@
+-- Your SQL goes here
+CREATE TABLE apps (
+  id SERIAL PRIMARY KEY,
+  client_id VARCHAR(255) NOT NULL UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
